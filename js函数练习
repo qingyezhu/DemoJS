@@ -1,0 +1,23 @@
+
+1、关于函数中的arguments
+//自动更新
+//arguments对象为其内部属性以及函数形式参数创建getter和setter方法
+//因此，改变形参的值会影响到arguments对象的值，反之亦然。
+function changeArgument(arr){
+arr[0] = arr[2];//10,1,10
+}
+function change(a,b,c){
+c = 10;//1,1,10
+changeArgument(arguments);
+return a + b + c;
+}
+console.log('change results: %s',change(1,1,1));//change results: 21
+function f(a){
+//当在严格模式下，不会创建getter和setter方法
+"use strict";
+a = 42;
+return [a,arguments[0]];//[42,17]
+}
+var pair = f(17);
+console.log(pair);// [42, 17]
+console.log(pair[0] === 42);//true
