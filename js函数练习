@@ -21,3 +21,14 @@ return [a,arguments[0]];//[42,17]
 var pair = f(17);
 console.log(pair);// [42, 17]
 console.log(pair[0] === 42);//true
+
+2、hasOwnProperty函数
+var foo={
+  bar:'abc',
+  hasOwnProperty:function(){
+  return false;
+  }
+};
+
+console.log(foo.hasOwnProperty('bar'));//false
+console.log(({}).hasOwnProperty.call(foo,'bar'));//true
