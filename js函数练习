@@ -32,3 +32,20 @@ var foo={
 
 console.log(foo.hasOwnProperty('bar'));//false
 console.log(({}).hasOwnProperty.call(foo,'bar'));//true
+
+3、JS中所有变量都是对象，除了null和undefined
+false.toString();//"false"
+[].toString();//""
+[1,2].toString();//"1,2"
+function Foo(){}
+Foo.bar = 1;
+Foo.bar;//1
+
+数字的字面值不是对象。
+2.toString();//error
+var a = 2;
+a.toString();//"2"
+2..toString();//"2"
+2 .toString();//"2"
+(2).toString();//"2"
+
