@@ -155,6 +155,116 @@ console.log(dog instanceof Dog);//true
 console.log(dog instanceof Animal);//true
 
 
+7、变量的作用域
+第一种：函数级作用域
+var scope = 'global';
+
+function show(){
+  console.log(scope);//undefined
+  var scope = 'locale';
+  console.log(scope);//locale
+}
+
+show();
+
+其实是：
+
+var scope = 'global';
+
+function show(){
+  var scope;
+  console.log(scope);//undefined
+  scope = 'locale';
+  console.log(scope);//locale
+}
+
+show();
+备注：变量在声明它们的函数体以及这个函数体嵌套的任意函数体内都是有定义的
+
+第二种：没有块级作用域
+var name = 'global';
+if(true){
+  var name = 'locale';
+  console.log(name);//locale
+}
+  console.log(name);//locale
+
+function show(flag){
+  if(flag){
+    var str = 'string';
+    for(var i = 0;i < 2;i ++)
+      ;
+  }
+  console.log(i);
+  console.log(str);
+
+}
+
+show(true);//2 string
+console.log('-------------');
+show(false);//undefined undefined
+
+备注：关于删除属性：
+var a = 1;
+delete a;//没用
+console.log(a);//1
+
+this.b = 2;
+delete b;
+console.log(b);//error
+
+c = 3;
+delete c;
+console.log(c);//error
+
+第三种：
+(function(){
+
+  var len = 4;
+  var obj = new Array(len);
+  
+  function show(){
+  
+    for(var i = 0;i < len;i ++){
+      obj[i] = { 
+        click : function(){
+          console.log(i);
+        }
+      };
+     
+    }
+  }
+  show();
+  for(var i = 0;i < len;i ++){
+    obj[i].click();//全部都是4
+  }
+})();
 
 
+改进：
 
+(function(){
+
+  var len = 4;
+  var obj = new Array(len);
+  
+  function show(){
+  
+    for(var i = 0;i < len;i ++){
+      
+      (function(j){
+       obj[j] = { 
+        click : function(){
+          console.log(j);
+        }
+      };
+      
+      })(i);
+     
+    }
+  }
+  show();
+  for(var i = 0;i < len;i ++){
+    obj[i].click();//0 1 2 3
+  }
+})();
