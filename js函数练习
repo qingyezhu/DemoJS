@@ -51,4 +51,110 @@ a.toString();//"2"
 
 4、访问属性时，使用点操作符或者中括号操作符;当属性是关键字或有空格时，使用中括号;删除属性使用delete;属性名一般加入双引号
 
+5、关于JS对象封装
+原始--对象封装
+var dog = {
+  name:'dog',
+  color:'red',
+  bark:function(){
+    console.log('dog bark');
+  }
+};
+
+console.log('%s %s',dog.name,dog.color);//dog red
+
+利用构造函数--对象封装
+function Cat(name,color){
+  this.name = name;
+  this.color = color;
+  this.eat = function(){
+    console.log('eat fish');
+  };
+}
+
+var cat1 = new Cat('Cat1','yellow');
+
+console.log('%o',cat1);//Cat { name="Cat1", color="yellow", eat=function()}
+console.log('%s %s',cat1.name,cat1.color);//Cat1 yellow
+console.log('%o %o',typeof cat1,cat1 instanceof Cat);//"object" true
+//该实例会自动含有一个'constructor'属性，指向它们的构造函数'Cat'
+
+
+var cat2 = Cat('Cat2','red');
+console.log('%o',cat2);//undefined
+
+原型(prototype)--对象封装
+
+function Dog(name,color){
+  this.name = name;
+  this.color = color;
+}
+
+Dog.prototype.type = 'animal';
+Dog.prototype.bark = function(){
+  console.log('dog bark');
+};
+
+var dog1 = new Dog('dog1','red');
+var dog2 = new Dog('dog2','green');
+
+console.log('dog1 = %s, dog2 = %s',dog1.type,dog2.type);//dog1 = animal, dog2 = animal
+console.log(dog1.type === dog2.type);//true
+console.log(dog1.constructor === Dog);//true
+
+
+dog2.type = 'change animal';
+console.log('dog1 = %s, dog2 = %s',dog1.type,dog2.type);//dog1 = animal, dog2 = change animal
+console.log(dog1.type === dog2.type);//false
+
+6、关于JS对象继承
+
+构造函数--对象继承
+function Animal(){
+  this.special = "animal";
+  this.sleep = function(){
+    console.log('sleep at night');
+  };
+}
+
+function Dog(name,color){
+  Animal.apply(this);
+  this.name = name;
+  this.color = color;
+}
+
+var dog = new Dog('dog','red');
+dog.sleep();//sleep at night
+
+原型--对象继承
+function Animal(){
+  this.special = "animal";
+  this.sleep = function(){
+    console.log('sleep at night');
+  };
+}
+
+function Dog(name,color){
+  Animal.apply(this);
+  this.name = name;
+  this.color = color;
+}
+
+Dog.prototype = new Animal();
+Dog.prototype.bark = function(){
+  console.log('dog bark!');
+};
+
+Dog.prototype.constructor = Cat;
+
+var dog = new Dog('dog','red');
+console.log(dog.constructor);//此时是 Cat(name, color)，否则是Animal
+dog.bark();
+dog.sleep();//sleep at night
+console.log(dog instanceof Dog);//true
+console.log(dog instanceof Animal);//true
+
+
+
+
 
