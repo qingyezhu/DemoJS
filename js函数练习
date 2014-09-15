@@ -268,3 +268,31 @@ console.log(c);//error
     obj[i].click();//0 1 2 3
   }
 })();
+
+8、构造函数
+
+function Bar(){
+   return 2;
+}
+console.log(new Bar().constructor===Bar);//true
+
+function Bar(){
+   return new Number(2);
+}
+console.log(new Bar().constructor===Number);//true
+
+
+function Test(){
+  this.val = 2;
+  return {
+    foo:1
+  };
+}
+//返回对象为Object的属性只有foo，没有val
+console.log(new Test());
+
+function Foo(){
+  this.bla = 1;
+}
+//当成是没有返回值的函数，故为undefined
+console.log(Foo());//undefined
