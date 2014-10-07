@@ -296,3 +296,43 @@ function Foo(){
 }
 //当成是没有返回值的函数，故为undefined
 console.log(Foo());//undefined
+
+9、当变量与函数同名时
+(function () {
+  function ffff(abcd) {
+    console.log(abcd); //abcd()
+    var abcd = 4321;
+    console.log(abcd); //4321
+    function abcd() {
+    }
+  }
+  ffff(123);
+}) ();
+(function () {
+  function ffff(abcd) {
+    var abcd = 4321;
+    console.log(abcd); //4321
+    console.log(abcd); //4321
+    function abcd() {
+    }
+  }
+  ffff(123);
+}) ();
+(function () {
+  function ffff(abcd) {
+    console.log(abcd); //123
+    var abcd = 4321;
+    console.log(abcd); //4321
+  }
+  ffff(123);
+}) ();
+(function () {
+  function ffff(abcd) {
+    var abcd = 4321;
+    console.log(abcd); //4321
+  }
+  ffff(123);
+}) ();
+
+一般情况下同名的函数比同名的变量优先读取。
+不过变量是从其被赋值之后才真正起作用。
