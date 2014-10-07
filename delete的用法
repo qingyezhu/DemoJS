@@ -80,9 +80,9 @@ function func3() {
 console.log(typeof func3);//function
 window.func3 = 2;
 console.log(typeof func3);//number
-console.log(delete func3);//true
-//备注：delete func3有可能是false
-console.log(typeof func3);//undefined
+console.log(delete func3);//false
+//备注：delete func3有可能是true
+console.log(typeof func3);//number
 
 console.log('func1 start arguments');
 function func1(){
