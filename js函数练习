@@ -336,3 +336,33 @@ console.log(Foo());//undefined
 
 一般情况下同名的函数比同名的变量优先读取。
 不过变量是从其被赋值之后才真正起作用。
+
+10、当函数定义在条件中时
+
+(function () {
+  var fff = function ggg() {
+    return 2;
+  };
+  console.log(typeof fff); //function
+  console.log(typeof ggg); //undefined
+  console.log(typeof fff()); //number
+}) ();
+(function () {
+  var abc = '1';
+  if (function ff() {
+  }) {
+    abc += typeof ff;
+  }
+  console.log(abc); //1undefined
+  console.log(typeof ff); //undefined
+  if (function fff(af) {
+    console.log('af: ' + af);//af:12
+  }(12)) {
+    abc += typeof fff;
+  } else {
+    abc = 'cba';
+  }
+  console.log(abc); //cba
+  console.log(typeof fff); //undefined
+}) ();
+
