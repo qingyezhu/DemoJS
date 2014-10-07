@@ -64,25 +64,25 @@ function ff1(){
 }
 console.log('---------');
 
-console.log('function ff2 start');
-function ff2() {
+console.log('function func2 start');
+function func2() {
 }
-console.log(typeof ff2);//function
-ff2 = 2;
-console.log(typeof ff2);//number
-console.log(delete ff2);//false
-console.log(typeof ff2);//number
+console.log(typeof func2);//function
+func2 = 2;
+console.log(typeof func2);//number
+console.log(delete func2);//false
+console.log(typeof func2);//number
 console.log('--------');
 
-console.log('function ff1 start');
-function ff1() {
+console.log('function func3 start');
+function func3() {
 }
-console.log(typeof ff1);//function
-window.ff1 = 2;
-console.log(typeof ff1);//number
-console.log(delete ff1);//true
-console.log(typeof ff1);//undefined
-
+console.log(typeof func3);//function
+window.func3 = 2;
+console.log(typeof func3);//number
+console.log(delete func3);//true
+//备注：delete func3有可能是false
+console.log(typeof func3);//undefined
 
 console.log('func1 start arguments');
 function func1(){
