@@ -24,3 +24,96 @@ delete的用法
   console.log(typeof abcd); //function
   console.log(typeof dcba); //function
 }) ();
+
+全局范围：
+console.log('var');
+var abc1 = 1;
+console.log(typeof abc1);//number
+console.log(delete abc1);//false
+console.log(typeof abc1);//number
+console.log('---------');
+
+console.log('no var');
+abc2 = 1;
+console.log(typeof abc2);//number
+console.log(delete abc2);//true
+console.log(typeof abc2);//undefined
+console.log('---------');
+
+console.log('this or window');
+this.abc3 = 1;
+console.log(typeof abc3);//number
+console.log(delete abc3);//true
+console.log(typeof abc3);//undefined
+console.log('---------');
+
+console.log('change value type');
+abc1 = '111';
+console.log(typeof abc1);//string
+console.log(delete abc1);//false
+console.log(typeof abc1);//string
+console.log('---------');
+
+
+console.log('function start');
+console.log(typeof ff1);//function
+console.log(delete ff1);//false
+console.log(typeof ff1);//function
+function ff1(){
+
+}
+console.log('---------');
+
+console.log('function ff2 start');
+function ff2() {
+}
+console.log(typeof ff2);//function
+ff2 = 2;
+console.log(typeof ff2);//number
+console.log(delete ff2);//false
+console.log(typeof ff2);//number
+console.log('--------');
+
+console.log('function ff1 start');
+function ff1() {
+}
+console.log(typeof ff1);//function
+window.ff1 = 2;
+console.log(typeof ff1);//number
+console.log(delete ff1);//true
+console.log(typeof ff1);//undefined
+
+
+console.log('func1 start arguments');
+function func1(){
+	console.log(typeof arguments);//object
+	console.log(delete arguments);//false
+	console.log(typeof arguments);//object
+	
+	var arr = [1,2,3];
+	console.log(delete arr);
+	console.log(delete arr.length);
+	
+}
+func1(12,23);
+
+特别的：
+(function () {
+  console.log('function change type start window');
+  console.log(typeof f2); //function
+  window.f2 = 321;
+  console.log(typeof f2); //function
+  console.log(typeof window.f2); //number
+  console.log(delete window.f2); //true
+  console.log(typeof window.f2); //undefined
+  function f2() {
+  }
+  console.log('-------------------------');
+}) ();
+
+
+备注：
+1、在全局或函数作用域中的变量或函数定义不能够删除；
+2、函数中的属性不能够删除；
+3、更改属性类型不能够删除；
+4、定义在Eval中变量或函数可以删除；
