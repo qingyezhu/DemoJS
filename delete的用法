@@ -1,0 +1,26 @@
+delete的用法
+
+(function () {
+  //删除对象中的属性
+  var obj = {
+    xxx: 123
+  };
+  console.log(obj.xxx); //123
+  console.log(delete obj.xxx); //true
+  console.log(obj.xxx); //undefined
+  //删除普通变量
+  var _fff = '1qaz2sx';
+  console.log(delete _fff);//false
+  console.log(_fff);//1qaz2sx
+  //删除函数
+  var abcd = function () {
+    return 2;
+  };
+  var dcba = abcd;
+  console.log(delete abcd); //false
+  console.log(typeof abcd); //function
+  console.log(typeof dcba); //function
+  console.log(delete dcba); //false
+  console.log(typeof abcd); //function
+  console.log(typeof dcba); //function
+}) ();
