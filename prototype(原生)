@@ -1,0 +1,28 @@
+(function() {
+    //函数表达式
+    //var Obj = function () {
+    //};
+    //函数声明
+    function Obj() {}
+    Obj.prototype = {
+        _name: '01',
+        setName: function(name) {
+            this._name = name;
+        }
+    };
+    var obj = new Obj();
+    var obj0 = new Obj();
+    console.dir(obj); //01 setName
+    console.dir(obj0); //01 setName
+    console.log(obj.hasOwnProperty('_name')); //false
+    console.log(obj.hasOwnProperty('setName')); //false
+    console.log(obj0.hasOwnProperty('_name')); //false
+    console.log(obj0.hasOwnProperty('setName')); //false
+    obj.setName('02');
+    console.dir(obj); //02 setName
+    console.dir(obj0); //01 setName
+    console.log(obj.hasOwnProperty('_name')); //true
+    console.log(obj.hasOwnProperty('setName')); //false
+    console.log(obj0.hasOwnProperty('_name')); //false
+    console.log(obj0.hasOwnProperty('setName')); //false
+})();
