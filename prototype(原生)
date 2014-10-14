@@ -28,14 +28,62 @@
     console.log(obj0.hasOwnProperty('setName')); //false
 })();
 
-2、扩展Array，增加forEach方法
- Array.prototype.forEach = function (fn, context) {
+2、扩展Array，增加forEach、map、filter、indexOf、lastIndexOf方法
+Array.prototype.forEach = function(fn, context) {
     if (typeof fn !== 'function') {
-      return;
+        return;
     }
-    for (var i = 0, len = this.length; i < len; i++) {
-      if (Object.prototype.hasOwnProperty.call(this, i)) {
-        fn.call(context, this[i], i, this);
-      }
+    var len = this.length,
+    i;
+    for (i = 0; i < len; i++) {
+        if (Object.prototype.hasOwnProperty.call(this, i)) {
+            fn.call(context, this[i], i, this);
+        }
     }
-  }
+}
+Array.prototype.map = function(fn, context) {
+    var len = this.length,
+    arr = [],
+    i;
+    if (typeof fn === 'function') {
+        for (i = 0; i < len; i++) {
+            arr.push(fn.call(context, this[i], i, this));
+        }
+    }
+    return arr;
+}
+Array.prototype.filter = function(fn, context) {
+    var len = this.length,
+    arr = [],
+    i;
+    if (typeof fn === 'function') {
+        for (i = 0; i < len; i++) {
+            fn.call(context, this[i], i, this) && arr.push(this[i]);
+        }
+    }
+    return arr;
+}
+Array.prototype.indexOf = function(searchElement, fromIndex) {
+    var index = -1,
+    len = this.length,
+    i;
+    fromIndex = fromIndex * 1 || 0;
+    for (i = 0; (i < len) && (index === -1); i++) {
+        if (i >= fromIndex && this[i] === searchElement) {
+            index = i;
+        }
+    }
+    return index;
+}
+Array.prototype.lastIndexOf = function(searchElement, fromIndex) {
+    var index = -1,
+    len = this.length,
+    i;
+    fromIndex = fromIndex * 1 || len - 1;
+    for (i = len - 1; (i > -1) && (index === -1); i--) {
+        if (i <= fromIndex && this[i] === searchElement) {
+            index = i;
+        }
+    }
+    return index;
+}
