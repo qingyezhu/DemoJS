@@ -1,3 +1,4 @@
+1、
 (function() {
     //函数表达式
     //var Obj = function () {
@@ -26,3 +27,15 @@
     console.log(obj0.hasOwnProperty('_name')); //false
     console.log(obj0.hasOwnProperty('setName')); //false
 })();
+
+2、扩展Array，增加forEach方法
+ Array.prototype.forEach = function (fn, context) {
+    if (typeof fn !== 'function') {
+      return;
+    }
+    for (var i = 0, len = this.length; i < len; i++) {
+      if (Object.prototype.hasOwnProperty.call(this, i)) {
+        fn.call(context, this[i], i, this);
+      }
+    }
+  }
