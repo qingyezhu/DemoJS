@@ -366,3 +366,21 @@ console.log(Foo());//undefined
   console.log(typeof fff); //undefined
 }) ();
 
+11、关于null,undefined,NaN的用法
+
+console.log(typeof null); //object
+console.log(typeof undefined); //undefined
+var a = null,
+b;
+console.log(typeof a); //object
+console.log(typeof b); //undefined
+console.log(a == b); //true
+console.log(null == undefined); //true
+console.log(a === b); //false
+var c = 100;
+console.log(a + c);//100
+console.log(b + c);//NaN
+var d=NaN;
+console.log(typeof d);//number
+
+
