@@ -1,0 +1,12 @@
+1、用js实现如下功能，将给定的数字转化成千分位的格式，如把“10000”转化成“10,000”
+
+String.prototype.toThousandth = function () {
+  var arr = this.split(''); //将字符串转化为数组
+  var start = arr.length % 3;
+  for (var i = start || 3; i < arr.length; i += 4) {
+    arr.splice(i, 0, ','); //删除从i位置开始的0个元素，之后在i位置开始添加,元素
+  }
+  var newstr = arr.join(''); //将数组转化为字符串
+  return newstr;
+}
+
