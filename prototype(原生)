@@ -87,3 +87,25 @@ Array.prototype.lastIndexOf = function(searchElement, fromIndex) {
     }
     return index;
 }
+
+3、Function.prototype
+(function () {
+  //通过给Function.prototype增加方法来使得该方法对所有函数可用
+  Function.prototype.method = function (name, func) {
+    this.prototype[name] = func;
+    return this;
+  };
+  //数字取整
+  Number.method('integer', function () {
+    return Math[this < 0 ? 'ceil' : 'floor'](this);
+  });
+  //字符串去除左右空格
+  String.method('trim', function () {
+    return this.replace(/^\s+|\s+$/g, '');
+  });
+  console.log(( - 10 / 3).integer());
+  var str = ' ab          ';
+  console.log(str.length);
+  console.log(str.trim().length);
+}) ();
+
