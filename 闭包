@@ -1,0 +1,54 @@
+1、最简单的例子
+(function () {
+  var Obj = function () {
+    var val = 0;
+    return {
+      increment: function (inc) {
+        val += typeof inc === 'number' ? inc : 1;
+      },
+      getValue: function () {
+        return val;
+      }
+    };
+  };
+  var obj = Obj();
+  console.log(obj.getValue()); //0
+  obj.increment(2);
+  console.log(obj.getValue()); //2
+}) ();
+
+2、设置一个Dom节点的渐变
+
+(function () {
+  //定义一个函数，它设置了一个Dom节点为黄色，然后把他渐变为白色
+  var fade = function (node) {
+    console.log(node);
+    var level = 1;
+    var step = function () {
+      var hex = level.toString(16);
+      node.style.backgroundColor = '#FFFF' + hex + hex;
+      if (level < 15) {
+        level++;
+        console.log(level);
+        setTimeout(step, 100);
+      }
+    };
+    setTimeout(step, 100);
+  };
+  fade(document.body);
+}) ();
+
+3、为每一个li添加点击事件，当点击时，提示是第几个
+(function () {
+  //为每一个li添加点击事件，当点击时，提示是第几个
+  var li_add = function (nodes) {
+    for (var i = 0, len = nodes.length; i < len; i++) {
+      nodes[i].onclick = (function (j) {
+        return function (e) {
+          alert(j);
+        };
+      }) (i);
+    }
+  };
+  console.log(li_add(document.getElementsByTagName('li')));
+}) ();
