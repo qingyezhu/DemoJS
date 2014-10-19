@@ -383,4 +383,13 @@ console.log(b + c);//NaN
 var d=NaN;
 console.log(typeof d);//number
 
-
+12、字符串反转-递归
+ //递归反转
+  function reverse(word) {
+    if (!word) {
+      return word;
+    }
+    var subWord = word.substr(1);
+    subWord = reverse(subWord);
+    return subWord + word.charAt(0);
+  }
