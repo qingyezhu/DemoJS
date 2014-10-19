@@ -92,8 +92,9 @@ Array.prototype.lastIndexOf = function(searchElement, fromIndex) {
 (function () {
   //通过给Function.prototype增加方法来使得该方法对所有函数可用
   Function.prototype.method = function (name, func) {
-    this.prototype[name] = func;
-    return this;
+     if (!this.prototype[name]) {
+      this.prototype[name] = func;
+    }
   };
   //数字取整
   Number.method('integer', function () {
