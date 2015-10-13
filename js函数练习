@@ -21,7 +21,21 @@ return [a,arguments[0]];//[42,17]
 var pair = f(17);
 console.log(pair);// [42, 17]
 console.log(pair[0] === 42);//true
-
+//更改参数
+(function(){
+  //更改参数
+  function change(){
+    //change before: {} [1, 2, 3]
+    console.log("change before: {}", arguments);
+    arguments[0] = 1111;
+    //change after: {} [1111, 2, 3]
+    console.log("change after: {}", arguments);
+    return arguments;
+  }
+  var arr = change(1,2,3);
+  //[1111, 2, 3]
+  console.log(arr);
+})();
 2、hasOwnProperty函数
 var foo={
   bar:'abc',
