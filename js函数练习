@@ -47,6 +47,26 @@ var foo={
 console.log(foo.hasOwnProperty('bar'));//false
 console.log(({}).hasOwnProperty.call(foo,'bar'));//true
 
+
+(function(){
+  function Base(){
+    this.first = 1;
+  }
+  
+  function Apple(){
+    Base.call(this);
+    this.second = 2;
+  }
+  
+  Apple.prototype.common = 3;
+  var apple = new Apple();
+  //hasOwnProperty一个对象是否具有指定名称的属性，不包括原型链中的属性
+  console.log(apple.hasOwnProperty('first'));//true
+  console.log(apple.hasOwnProperty('second'));//true
+  console.log(apple.hasOwnProperty('common'));//false
+  
+})();
+
 3、JS中所有变量都是对象，除了null和undefined
 false.toString();//"false"
 [].toString();//""
