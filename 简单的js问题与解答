@@ -10,3 +10,74 @@ String.prototype.toThousandth = function () {
   return newstr;
 }
 
+2、删除对象中的属性时，该属性应该是默认值
+1）、错误的想法
+//原型链继承问题
+(function(){
+  function BaseObject(name){
+    if(typeof name != 'undefined'){
+      this.name = name;
+    }else{
+      this.name = 'default';
+    }
+  }
+  
+  var firstObject = new BaseObject();
+  console.log(firstObject.name);//default
+  var secondObject = new BaseObject('uniq');
+  console.log(secondObject.name);//uniq
+  delete secondObject.name;
+  console.log(secondObject.name);//undefined
+})();
+
+2）、正确的想法
+//原型链继承问题
+(function(){
+  function BaseObject(name){
+    if(typeof name != 'undefined'){
+      this.name = name;
+    }
+  }
+  
+  //BaseObject继承了原型中的name属性，被设置为default。这时，如果构造函数被调用时没有参数，则会自动设置为default.
+  //同理，如果name属性被从BaseObject中移出，系统将会自动寻找原型链，并且获得default值
+  BaseObject.prototype.name = 'default';
+ 
+  var firstObject = new BaseObject();
+  console.log(firstObject.name);//default
+  var secondObject = new BaseObject('uniq');
+  console.log(secondObject.name);//uniq
+  delete secondObject.name;
+  console.log(secondObject.name);//default
+})();
+
+3、对象中的方法赋给外部对象，由外部对象调用
+1）错误想法
+//为实例方法创建错误的引用
+(function(){
+  function MyObject(){
+  }
+  MyObject.prototype.show = function(){
+    console.log(this === window ? 'window' : 'MyObject');
+  };
+  
+  var obj = new MyObject();
+  var show = obj.show;
+  obj.show();//MyObject
+  show();//window
+})();
+
+2）、正确的想法
+//为实例方法创建错误的引用
+(function(){
+  function MyObject(){
+  }
+  MyObject.prototype.show = function(){
+    console.log(this === window ? 'window' : 'MyObject');
+  };
+  
+  var obj = new MyObject();
+  var show = obj.show.bind(obj);
+  obj.show();//MyObject
+  show();//MyObject
+})();
