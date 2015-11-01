@@ -1,3 +1,18 @@
 事件流：描述的是在页面中接收事件的顺序
 事件冒泡：由最具体的元素接收，然后逐级向上传播至最不具体的元素的节点（文档）
 事件捕获：最不具体的节点先接收事件，而最具体的节点应该是最后接收事件
+
+
+DOM中：用于处理指定和删除事件处理程序的操作addEventListener()和removeEventListener()。他们都接收三个参数：要处理的事件名、作为事件处理程序的函数和布尔值(事件处理的时候)[true:事件捕获时;false:事件冒泡时]
+DOM中的事件对象：
+type属性 用于获取事件类型;
+target属性 用于获取事件目标
+stopPropagation()方法 用于阻止事件冒泡
+preventDefault()方法 用于阻止事件的默认行为
+
+IE中：attachEvent()和detachEvent()，接收相同的两个参宿：事件处理程序的名称和事件处理程序的函数。
+IE中的事件对象：
+type属性 用于获取事件类型
+srcElement属性 用于后去事件目标
+cancelBubble属性 用于阻止事件冒泡[true:阻止事件冒泡;false:不阻止事件冒泡;]
+returnValue属性 用于阻止事件的默认行为 [false:阻止事件的默认行为;]
