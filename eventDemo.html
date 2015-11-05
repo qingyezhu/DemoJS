@@ -1,0 +1,96 @@
+
+<html>
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<title>JS事件测试</title>
+	<script>
+			var eventUtil = {
+				//添加事件
+				addHandler: function(element, type, handler){
+					if(element.addEventListener){
+						//非IE下
+						element.addEventListener(type, handler, false);
+					}else if(element.attachEvent){
+						element.attachEvent('on' + type, handler);
+					}else{
+						//IE下
+						element['on' + type] = handler;
+					}
+				},
+				//删除事件
+				removeHandler: function(element, type, handler){
+					if(element.removeEventListener){
+						//非IE下
+						element.removeEventListener(type, handler, false);
+					}else if(element.detachEvent){
+						element.detachEvent('on' + type, handler);
+					}else{
+						//IE下
+						element['on' + type] = null;
+					}
+				},
+				//获取目标元素
+				getElement: function(event){
+					return event.target || event.srcElement;
+				},
+				//阻止默认行为
+				preventDefault: function(event){
+					if(event.preventDefault){
+						//非IE下
+						event.preventDefault();
+					}else{
+						//IE下
+						event.returnValue = false;
+					}
+				},
+				//阻止事件冒泡
+				stopPropagation: function(event){
+					if(event.stopPropagation){
+						//非IE下
+						event.stopPropagation();
+					}else{
+						//IE下
+						event.cancelBubble = true;
+					}
+				}
+			};
+			var btn = null, div = null;
+			window.onload = function(){
+				btn = document.getElementById('id');
+				eventUtil.addHandler(document.getElementById('divId'), 'click', showDivMsg);
+				
+				eventUtil.addHandler(document.getElementById('addId'), 'click', addEvent);
+				eventUtil.addHandler(document.getElementById('removeId'), 'click', removeEvent);
+			}
+			
+			function addEvent(){
+				eventUtil.addHandler(btn, 'click', showMsg);
+			}
+			
+			function removeEvent(){
+				eventUtil.removeHandler(btn, 'click', showMsg);
+			}
+			
+			function showMsg(event){
+				alert(eventUtil.getElement(event).getAttribute('data') + '事件');
+				eventUtil.preventDefault(event);
+				eventUtil.stopPropagation(event);
+			}
+			
+			function showDivMsg(){
+				alert("DIV事件");
+			}
+		
+			
+	</script>
+
+</head>
+<body>
+	<div id="divId" data="事件冒泡">
+		<a id="id" href="http://baidu.com" data="默认行为">跳转</a>
+		<span data="span">测试事件冒泡与事件捕获</span>
+		<input type="button" value="添加按钮" id="addId" data="添加"/>
+		<input type="button" value="删除按钮" id="removeId" data="删除"/>
+	</div>
+ </body>
+ </html>
