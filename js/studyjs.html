@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang=en>
+	<head>
+		<meta charset=utf-8>
+		<link rel="stylesheet" type="text/css" href="masklayer.css">
+		<link rel="stylesheet" type="text/css" href="tipmessage.css">
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="masklayer.js"></script>
+		<script type="text/javascript" src="tipmessage.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var $masklayer = $('#maskLayerId').MaskLayer();
+
+				var j = 0;
+				var i = setInterval(function(){
+					j ++;
+					$masklayer.MaskLayer('openMask', '查询等待中。。。。' + j);
+					setTimeout(function(){
+						$masklayer.MaskLayer('closeMask');
+					}, 1000);
+
+					if(j > 5){
+						clearInterval(i);
+					}
+				}, 2000);
+
+				// setTimeout(function(){
+				// 	$masklayer.MaskLayer('openMask', '查询等待中。。。。');
+				// }, 3000);
+
+				// setTimeout(function(){
+				// 	$masklayer.MaskLayer('closeMask');
+				// }, 5000);
+
+
+
+				var $tipMessage = $('#tipMessageId').tipMessage();
+
+			    var jj = 0;
+				var ii = setInterval(function(){
+					jj++;
+					$tipMessage.tipMessage('openTipMessage', '信息保存中。。。。' + jj);
+					setTimeout(function(){
+						$tipMessage.tipMessage('closeTipMessage');
+					}, 1100);
+
+					if(jj > 8){
+						clearInterval(ii);
+					}
+				}, 2100);
+
+
+				// setTimeout(function(){
+				// 	$tipMessage.tipMessage('openTipMessage', '信息保存中。。。。');
+				// }, 500);
+
+				// setTimeout(function(){
+				// 	$tipMessage.tipMessage('closeTipMessage');
+				// }, 2000);
+
+			});
+		</script>
+	</head>
+	<body>
+		<div id="maskLayerId"></div>
+		<div id="tipMessageId"></div>
+	</body>
+</html>

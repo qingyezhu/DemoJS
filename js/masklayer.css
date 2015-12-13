@@ -1,0 +1,33 @@
+.mask-layer{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	opacity: .5;
+	background-color: #777;
+}
+
+.mask-layer-conent{
+	position: absolute;
+	left: 45%;
+	top: 45%;
+	padding: 10px;
+	border: 1px solid green;
+	box-shadow: 0 0 30px #44f;
+	border-radius: 8px;
+}
+
+.mask-layer-msg{
+	display: inline-block;
+	vertical-align: top;
+	height: 32px;
+	line-height: 32px;
+	margin: 0 10px;
+	color: blue;
+}
+
+.mask-layer-img{
+	width: 32px;
+	height: 32px;
+}

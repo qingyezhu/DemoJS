@@ -1,0 +1,20 @@
+.tip-message{
+	position: fixed;
+	top: 0;
+	width: 22%;
+	margin-left: 70%;
+}
+
+.tip-message-content{
+	padding:10px 0;
+	margin-bottom: 20px;
+	opacity: .5;
+	border-radius: 4px;
+	background-color: #ccc;
+	border: 1px solid #fcc;
+	text-align: center;
+}
+
+.tip-message-msg{
+	color: green;
+}
