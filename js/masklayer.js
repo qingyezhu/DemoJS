@@ -8,7 +8,8 @@
 			conentLayerCssName: 'mask-layer-conent',
 			msgMaskLayerCssName: 'mask-layer-msg',
 			imgMaskLayerCssName: 'mask-layer-img',
-			autoOpen: false
+			autoOpen: false,
+			zIndex: 998
 		};
 		
 		var settings = $.extend({}, defaults, options);
@@ -34,7 +35,7 @@
 				//创建遮罩层方法
 
 				var that = this;
-				that.prop('class', settings.maskLayerCssName);
+				that.prop('class', settings.maskLayerCssName).prop('zIndex', settings.zIndex);
 				
 				var $msg = $('<span></span>').prop('class', settings.msgMaskLayerCssName).html(settings.msg);
 
@@ -88,7 +89,7 @@
 		msg && that.find('span').html(msg);
 
 		var height = that.css('height');
-		that.css({'opacity': 1, 'display': 'block', 'top': '-' + height.substr(0, height.length - 2) + 'px'})
+		that.css({'opacity': 0.8, 'display': 'block', 'top': '-' + height.substr(0, height.length - 2) + 'px'})
 
 		that.animate({top: 0}, 'normal');
 		return that;

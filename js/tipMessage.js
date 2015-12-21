@@ -1,11 +1,12 @@
 ;(function(){
-	$.fn.tipMessage = function(options){
+	$.fn.TipMessage = function(options){
 		var defaults = {
 			msg: '提示信息',
 			tipMessageCssName: 'tip-message',
 			contentCssName: 'tip-message-content',
 			msgCssName: 'tip-message-msg',
-			autoOpen: false
+			autoOpen: false,
+			zIndex: 999
 		};
 
 		var settings = $.extend({}, defaults, options);
@@ -28,7 +29,7 @@
 				//创建消息提示
 				var that = this;
 
-				that.prop('class', settings.tipMessageCssName);
+				that.prop('class', settings.tipMessageCssName).prop('zIndex', settings.zIndex);
 
 				var $msg = $('<span></span>').prop('class', settings.msgCssName).html(settings.msg);
 
@@ -42,14 +43,14 @@
 			openTipMessage: function(msg){
 				//打开消息提示
 				var that = this;
-				$.fn.tipMessage.showTip.call(that, msg);
+				$.fn.TipMessage.showTip.call(that, msg);
 				return that;
 
 			},
 			closeTipMessage: function(){
 				//关闭消息提示
 				var that = this;
-				$.fn.tipMessage.hideTip.call(that);
+				$.fn.TipMessage.hideTip.call(that);
 				return that;
 			}
 		};
@@ -67,7 +68,7 @@
 		return method.apply(this, arguments);
 	}
 
-	$.fn.tipMessage.showTip = function(msg){
+	$.fn.TipMessage.showTip = function(msg){
 		//打开消息提示
 		var that = this;
 
@@ -82,7 +83,7 @@
 		return that;
 	}
 
-	$.fn.tipMessage.hideTip = function(){
+	$.fn.TipMessage.hideTip = function(){
 		//关闭消息提示
 		var that = this;
 

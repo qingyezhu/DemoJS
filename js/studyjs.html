@@ -34,14 +34,14 @@
 
 
 
-				var $tipMessage = $('#tipMessageId').tipMessage();
+				var $tipMessage = $('#tipMessageId').TipMessage();
 
 			    var jj = 0;
 				var ii = setInterval(function(){
 					jj++;
-					$tipMessage.tipMessage('openTipMessage', '信息保存中。。。。' + jj);
+					$tipMessage.TipMessage('openTipMessage', '信息保存中。。。。' + jj);
 					setTimeout(function(){
-						$tipMessage.tipMessage('closeTipMessage');
+						$tipMessage.TipMessage('closeTipMessage');
 					}, 1100);
 
 					if(jj > 8){
