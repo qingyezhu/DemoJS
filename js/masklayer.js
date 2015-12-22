@@ -35,7 +35,7 @@
 				//创建遮罩层方法
 
 				var that = this;
-				that.prop('class', settings.maskLayerCssName).prop('zIndex', settings.zIndex);
+				that.prop('class', settings.maskLayerCssName).css('zIndex', settings.zIndex);
 				
 				var $msg = $('<span></span>').prop('class', settings.msgMaskLayerCssName).html(settings.msg);
 

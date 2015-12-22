@@ -29,7 +29,7 @@
 				//创建消息提示
 				var that = this;
 
-				that.prop('class', settings.tipMessageCssName).prop('zIndex', settings.zIndex);
+				that.prop('class', settings.tipMessageCssName).css('zIndex', settings.zIndex);
 
 				var $msg = $('<span></span>').prop('class', settings.msgCssName).html(settings.msg);
 
