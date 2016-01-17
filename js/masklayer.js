@@ -41,7 +41,10 @@
 
 				var $img = $('<img/>').prop('class', settings.imgMaskLayerCssName).prop('src', settings.img);
 
-				var $content = $('<div></div>').prop('class', settings.conentLayerCssName);
+				var $content = $('<div></div>').prop('class', settings.conentLayerCssName).css({
+					left: (Math.max(document.body.scrollWidth, document.documentElement.scrollWidth) - 200) / 2 + 'px',
+					top: (Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - 50) / 2 + 'px'
+				});
 
 				$img.appendTo($content);
 				$msg.appendTo($content);
@@ -89,7 +92,10 @@
 		msg && that.find('span').html(msg);
 
 		var height = that.css('height');
-		that.css({'opacity': 0.8, 'display': 'block', 'top': '-' + height.substr(0, height.length - 2) + 'px'})
+		var _scrollHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+		var _scrollWidth = Math.max(document.body.scrollWidth, document.documentElement.scrollWidth);
+
+		that.css({'opacity': 0.8, 'display': 'block', 'top': '-' + height.substr(0, height.length - 2) + 'px', 'width': _scrollWidth + 'px', 'height': _scrollHeight + 'px'})
 
 		that.animate({top: 0}, 'normal');
 		return that;
